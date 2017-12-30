@@ -62,7 +62,7 @@ class Blockchain(object):
       
       #make sure dictionary is ordered to ensure consistent hashes
       block_string = json.dumps(block, sort_keys=True).encode()
-      return hashlib.sha256(block_string).hexDigest()
+      return hashlib.sha256(block_string).hexdigest()
 
    @property
    def last_block(self):
@@ -82,7 +82,7 @@ class Blockchain(object):
 
       proof = 0
 
-      while self.valid_proof(last_proof) is False:
+      while self.valid_proof(last_proof, proof) is False:
          proof += 1
 
       return proof
@@ -98,5 +98,5 @@ class Blockchain(object):
       '''
 
       guess = f'{last_proof}{proof}'.encode()
-      guess_hash = hashlib.sha256(guess).hexDigest()
+      guess_hash = hashlib.sha256(guess).hexdigest()
       return guess_hash[0:4] == '0000'
