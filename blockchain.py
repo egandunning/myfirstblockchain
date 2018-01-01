@@ -5,6 +5,7 @@ from urllib.parse import urlparse
 from time import time
 
 class Blockchain(object):
+
    def __init__(self):
       self.chain = []
       self.current_transactions = []
@@ -45,6 +46,39 @@ class Blockchain(object):
 
       parsed_url = urlparse(address)
       self.nodes.add(parsed_url.netloc)
+
+   def valid_chain(self, chain):
+      '''
+      Determine if a given blockchain is valid.
+
+      :param chain: <list> A blockchain
+      :return: <bool> True if valid, false if invalid
+      '''
+
+      current_block = chain[0]
+      previous_block = chain[0]
+      index = 1
+      
+      #Iterate over entire chain
+      while index < len(chain):
+
+         previous_block = chain[index]
+
+         #Check if current block's stored hash matches actual value
+         if current_block['previous_hash'] != self.hash(previous_block):
+            return False
+
+         #Check if proof of work is correct
+         if not self.valid_proof(previous_block['proof'], current_block['proof']):
+            return False
+
+         #Set the current block for the next iteration, increment index
+         current_block = chain[index]
+         index += 1
+
+      #All blocks were valid.
+      return True
+
 
    def new_transaction(self, sender, recipient, amount):
       '''
