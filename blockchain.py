@@ -1,5 +1,6 @@
 import hashlib
 import json
+import requests
 
 from urllib.parse import urlparse
 from time import time
