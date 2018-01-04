@@ -5,6 +5,7 @@ import requests
 from urllib.parse import urlparse
 from time import time
 
+
 class Blockchain(object):
 
    def __init__(self):
@@ -59,22 +60,28 @@ class Blockchain(object):
       current_block = chain[0]
       previous_block = chain[0]
       index = 1
-      
+
       #Iterate over entire chain
       while index < len(chain):
 
-         previous_block = chain[index]
+         current_block = chain[index]
+
+         logger.info(f'Validating block {index} of {len(chain)}')
 
          #Check if current block's stored hash matches actual value
+
          if current_block['previous_hash'] != self.hash(previous_block):
             return False
+
+         temp1 = previous_block['proof']
+         temp2 = current_block['proof']
 
          #Check if proof of work is correct
          if not self.valid_proof(previous_block['proof'], current_block['proof']):
             return False
 
          #Set the current block for the next iteration, increment index
-         current_block = chain[index]
+         previous_block = chain[index]
          index += 1
 
       #All blocks were valid.
@@ -98,11 +105,13 @@ class Blockchain(object):
       #Verify and check length of each chain in network
       for node in neighbors:
          response = requests.get(f'http://{node}/chain')
-
+         logger.info(f'received response from http://{node}/chain with code {response.status_code}')
          if response.status_code == 200:
             responseObj = response.json()
             length = responseObj['length']
             chain = responseObj['chain']
+
+            logger.info(f'discovered chain with length {length}')
 
             #Check if chain is longer than this one, and is valid
             if length > max_length and self.valid_chain(chain):

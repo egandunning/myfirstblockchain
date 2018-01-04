@@ -1,9 +1,21 @@
 import json
+import logging
 
 from blockchain import Blockchain
 from textwrap import dedent
 from uuid import uuid4
 from flask import Flask, jsonify, request
+
+logger = logging.getLogger()
+logger.setLevel(logging.DEBUG)
+
+fh = logging.FileHandler('blockchain.log')
+fh.setLevel(logging.DEBUG)
+logger.addHandler(fh)
+
+sh = logging.StreamHandler()
+sh.setLevel(logging.INFO)
+logger.addHandler(sh)
 
 #Instantiate node
 app = Flask(__name__)
