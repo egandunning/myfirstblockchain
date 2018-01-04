@@ -66,8 +66,6 @@ class Blockchain(object):
 
          current_block = chain[index]
 
-         logger.info(f'Validating block {index} of {len(chain)}')
-
          #Check if current block's stored hash matches actual value
 
          if current_block['previous_hash'] != self.hash(previous_block):
@@ -105,13 +103,11 @@ class Blockchain(object):
       #Verify and check length of each chain in network
       for node in neighbors:
          response = requests.get(f'http://{node}/chain')
-         logger.info(f'received response from http://{node}/chain with code {response.status_code}')
+
          if response.status_code == 200:
             responseObj = response.json()
             length = responseObj['length']
             chain = responseObj['chain']
-
-            logger.info(f'discovered chain with length {length}')
 
             #Check if chain is longer than this one, and is valid
             if length > max_length and self.valid_chain(chain):
