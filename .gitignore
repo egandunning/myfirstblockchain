@@ -102,3 +102,10 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+# vim temp file
+*.swp
+
+# --go stuff--
+#"playground" file
+go/test*
