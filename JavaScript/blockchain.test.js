@@ -55,3 +55,32 @@ describe('registerNode()', () => {
       expect(blockchain.nodes).toEqual(['node']);
    });
 });
+
+describe('newTransaction()', () => {
+   it('should add a transaction to the list of transactions', () => {
+      blockchain.newTransaction('me', 'you', 1, {some:'data'});
+      expect(blockchain.currentTransactions.length).toBe(1);
+   });
+
+   it('should add the new transactions to the newly mined block', () => {
+      blockchain.newTransaction('you', 'me', 100);
+      blockchain.newTransaction('me', 'you', 3, {name:'fred', volume:11});
+      const lastBlock = blockchain.lastBlock();
+      const proof = Blockchain.proofOfWork(lastBlock.proof);
+      blockchain.newBlock(proof, lastBlock.hash);
+      const txs = blockchain.lastBlock().transactions;
+      expect(txs.length).toBe(2);
+      expect(txs[0]).toEqual({
+         sender: 'you',
+         recipient: 'me',
+         amount: 100,
+         data: undefined
+      });
+      expect(txs[1]).toEqual({
+         sender: 'me',
+         recipient: 'you',
+         amount: 3,
+         data: {name:'fred', volume:11} 
+      });
+   });
+});
