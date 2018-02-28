@@ -84,3 +84,16 @@ describe('newTransaction()', () => {
       });
    });
 });
+
+describe('proofOfWork()', () => {
+   it('should return a number', () => {
+      expect(typeof Blockchain.proofOfWork(500)).toBe('number');
+   });
+
+   it('should compute a valid proof of work', () => {
+      const lastProof = 10;
+      const proof = Blockchain.proofOfWork(lastProof);
+      const hash = Blockchain.hash(`${lastProof}${proof}`);
+      expect(Blockchain.validProof(lastProof, proof)).toBe(true);
+   });
+});

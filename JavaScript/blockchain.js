@@ -1,5 +1,4 @@
-'use strict';
-const requests = require('requests');
+//const request = require('request');
 const crypto = require('crypto');
 
 class Blockchain {
@@ -97,9 +96,8 @@ class Blockchain {
       let maxLength = this.chain.length;
       
       neighbors.foreach(node => {
-         //todo: send request
-         //let response = requests.get(`${node}/chain`);
-         //todo: process response
+         let response = request.get(`${node}/chain`);
+         console.log(response); 
       });
 
       if(newChain) {
