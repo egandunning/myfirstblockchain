@@ -109,3 +109,6 @@ ENV/
 # --go stuff--
 #"playground" file
 go/test*
+
+# --js stuff--
+JavaScript/node_modules
