@@ -149,7 +149,7 @@ class Blockchain {
     * @returns{number} The proof of work to be used in the next block. Proves
     * that the block was mined.
     */
-   proofOfWork(lastProof) {
+   static proofOfWork(lastProof) {
       let proof = 0;
       while(!Blockchain.validProof(lastProof, proof)) {
          proof++;
