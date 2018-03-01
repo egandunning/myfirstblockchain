@@ -1,0 +1,9 @@
+.content {
+   margin: .25em;
+}
+
+div.container {
+   border: 1px solid #333;
+   padding-left: 1em;
+   margin: 0.5em;
+}

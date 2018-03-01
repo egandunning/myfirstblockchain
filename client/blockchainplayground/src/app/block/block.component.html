@@ -1,0 +1,10 @@
+<div class="block container">
+   <p>Index: {{block.index}}</p>
+   <p>Created at: {{block.createdAt}}</p>
+   <p>Proof of work: {{block.proof}}</p>
+   <p>Hashed chain: {{block.hash}}</p>
+   <div class="container">Transactions: 
+      <app-transactions [transactions]="block.transactions">
+      </app-transactions>
+   </div>
+</div>

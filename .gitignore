@@ -112,3 +112,47 @@ go/test*
 
 # --js stuff--
 JavaScript/node_modules
+
+# --angular stuff--
+# compiled output
+client/blockchainplayground/dist
+client/blockchainplayground/dist-server
+client/blockchainplayground/tmp
+client/blockchainplayground/out-tsc
+
+# dependencies
+client/blockchainplayground/node_modules
+
+# IDEs and editors
+client/blockchainplayground/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# misc
+client/blockchainplayground/.sass-cache
+client/blockchainplayground/connect.lock
+client/blockchainplayground/coverage
+client/blockchainplayground/libpeerconnection.log
+client/blockchainplayground/npm-debug.log
+client/blockchainplayground/yarn-error.log
+client/blockchainplayground/testem.log
+client/blockchainplayground/typings
+
+# e2e
+client/blockchainplayground/e2e/*.js
+client/blockchainplayground/e2e/*.map
+
+# System Files
+client/blockchainplayground/.DS_Store
+client/blockchainplayground/Thumbs.db

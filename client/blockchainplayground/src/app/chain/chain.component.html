@@ -1,0 +1,7 @@
+<div class="content">
+   Diplaying blockchain containing {{chain.length}} blocks.
+</div>
+<div class="container">
+   Chain:
+   <app-block *ngFor="let block of chain" [block]="block"></app-block>
+</div>
