@@ -1,5 +1,7 @@
 export class Transaction {
 
+   public _prettyData: string;
+
    constructor(
          public sender: string,
          public recipient: string,
